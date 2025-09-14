@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import { SelectedPage } from "@/shared/types";
 import { motion } from "framer-motion";
 import ContactUsPageGraphic from "@/assets/ContactUsPageGraphic.png";
@@ -97,7 +96,7 @@ const ContactUs = ({ setSelectedPage }: Props) => {
               // or handle in-app:
               onValid={(data) => console.log(data)}
             />
-            
+          
           </motion.div>
 
           <motion.div
