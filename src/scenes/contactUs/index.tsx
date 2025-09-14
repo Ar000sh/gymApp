@@ -11,21 +11,6 @@ type Props = {
 };
 
 const ContactUs = ({ setSelectedPage }: Props) => {
-  const inputStyles = `mb-5 w-full rounded-lg bg-primary-300
-  px-5 py-3 placeholder-white`;
-
-  const {
-    register,
-    trigger,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = async (e: any) => {
-    const isValid = await trigger();
-    if (!isValid) {
-      e.preventDefault();
-    }
-  };
 
   const fields: FormField[] = [
     {
@@ -36,18 +21,6 @@ const ContactUs = ({ setSelectedPage }: Props) => {
       placeholder: "NAME",
       rules: { required: true, maxLength: 100 },
       messages: { maxLength: "Max length is 100 char." },
-    },
-    {
-      type: "input",
-      id: "input-3",
-      name: "password",
-      label: "Password",
-      //placeholder: "PASSWORD",
-      inputType: "password",
-      rules: {
-        required: true,
-      },
-      messages: { pattern: "Invalid email address." },
     },
     {
       type: "input",
