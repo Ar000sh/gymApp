@@ -12,6 +12,10 @@ import BenefitsPageGraphic from "@/assets/BenefitsPageGraphic.png";
 import Benefit from "./Benefit";
 import AbstractWaves from "@/assets/AbstractWaves.png"; 
 import ContentSparkles from "@/assets/Sparkles.png"
+import type { JSX } from "react";
+import Carousel from "../carousel";
+import { PaginationBulletsType, type SwipperPaginationOptions } from "@/shared/swipper";
+import { tr } from "framer-motion/client";
 
 const benefits: Array<BenefitType> = [
   {
@@ -46,6 +50,23 @@ type Props = {
 };
 
 const Benefits = ({ setSelectedPage }: Props) => {
+  const populateSwiperArray = (array: any[]) : React.ReactElement[] => {
+    const swipperArray: JSX.Element[] = [];
+    array.map((item, index) => (
+      swipperArray.push(
+        <Benefit
+              key={item.title}
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+              setSelectedPage={setSelectedPage}
+            />
+      )
+      ));
+      return swipperArray;
+  };
+
+  const swipperArray = populateSwiperArray(benefits);
   return (
     <section id="benefits" className="mx-auto min-h-full w-5/6 py-20">
       <motion.div
@@ -90,6 +111,26 @@ const Benefits = ({ setSelectedPage }: Props) => {
               setSelectedPage={setSelectedPage}
             />
           ))}
+        </motion.div>
+
+        <motion.div
+          className=""
+          //className="mt-5 gap-8 flex flex-col md:flex-row"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={container}
+        >
+          <Carousel 
+          elements={swipperArray} 
+          spaceBetween={10} 
+          maxWidth={400} 
+          containerStyles="" 
+          enablePagination={true}
+          loop={true}
+          enableNavigation={true}
+          />
+
         </motion.div>
 
         {/* GRAPHICS AND DESCRIPTION */}

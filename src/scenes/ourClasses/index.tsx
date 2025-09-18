@@ -101,7 +101,7 @@ const OurClasses = ({ setSelectedPage }: Props) => {
           </div>
         </motion.div>
         
-        <div className="h-full w-full">
+        <div className="">
           <Carousel elements={swipperArray} spaceBetween={10} maxWidth={400} containerStyles="px-7"   />
         </div>
       </motion.div>

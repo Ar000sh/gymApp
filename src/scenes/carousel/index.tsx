@@ -2,11 +2,13 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import type { PaginationOptions,  ScrollbarOptions } from "swiper/types";  
 
 
 // Import Swiper styles
 // Import Swiper styles
 import 'swiper/swiper-bundle.css';
+import type { SwipperPaginationOptions } from '@/shared/swipper';
 
 function useMeasuredWidth<T extends HTMLElement>() {
   const ref = React.useRef<T | null>(null);
@@ -35,15 +37,18 @@ function useMeasuredWidth<T extends HTMLElement>() {
   
   return { ref, width } as const;
 }
-type Props = {
-  elements: React.ReactElement[];
-  spaceBetween: number;
-  containerStyles: string;
-  maxWidth: number;
-};
-const Carousel = ({elements, spaceBetween=50, containerStyles = "", maxWidth=450}: Props) => {
-  const { ref: containerRef, width: measuredWidth } = useMeasuredWidth<HTMLDivElement>();
 
+const extractPaginationOptions = (
+  opts?: SwipperPaginationOptions
+): PaginationOptions => {
+  return {
+    // default look
+    type: (opts?.bulletsType ?? "bullets") as PaginationOptions["type"],
+    clickable: opts?.clickable ?? true,
+    dynamicBullets: opts?.dynamicBullets ?? false,
+    // You can add 'el' or render functions here later if needed
+  };
+};
 function computeSlidesPerView(
 width: number,
 spaceBetween: number,
@@ -64,6 +69,28 @@ const slideWidth = Math.max(1, raw);
 console.log("slideWidth: ", slideWidth)
 return Math.floor(slideWidth);
 }
+type Props = {
+  elements: React.ReactElement[];
+  spaceBetween: number;
+  containerStyles: string;
+  maxWidth: number;
+  enableNavigation?: boolean;
+  enablePagination?: boolean;
+  paginationOptions?: SwipperPaginationOptions;
+  enableScrollbar?: boolean;
+  loop?: boolean;
+};
+const Carousel = ({elements, spaceBetween=50, containerStyles = "", maxWidth=450, enableNavigation, enablePagination, enableScrollbar, paginationOptions, loop}: Props) => {
+  const { ref: containerRef, width: measuredWidth } = useMeasuredWidth<HTMLDivElement>();
+
+  const pagination: PaginationOptions | boolean = enablePagination
+  ? (paginationOptions
+      ? extractPaginationOptions(paginationOptions)
+      : { clickable: true })
+  : false;
+
+  const scrollbar:  ScrollbarOptions | boolean = enableScrollbar 
+  ? { draggable: true } : false;
 
 const slidesPerView = computeSlidesPerView(measuredWidth, spaceBetween, maxWidth);
 console.log("slidesPerView: ", slidesPerView)
@@ -74,9 +101,10 @@ console.log("slidesPerView: ", slidesPerView)
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={spaceBetween}
         slidesPerView={slidesPerView}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
+        navigation={enableNavigation ? enableNavigation : false}
+        pagination={pagination}
+        scrollbar={scrollbar}
+        loop={loop}
         onSlideChange={() => console.log('slide change')}
       >
           {elements.map((el, i) => (
