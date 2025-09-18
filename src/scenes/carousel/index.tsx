@@ -78,10 +78,6 @@ console.log("slidesPerView: ", slidesPerView)
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
         onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => {
-          console.log("swiper iniated")
-        }}
-        //ref={}
       >
           {elements.map((el, i) => (
             <SwiperSlide className='!flex !items-center !justify-center h-full' key={el.key ?? i}>{el}</SwiperSlide>
