@@ -8,6 +8,8 @@ import image6 from "@/assets/image6.png";
 import { motion } from "framer-motion";
 import HText from "@/shared/HText";
 import Class from "./Class";
+import Carousel from "../carousel";
+import type { JSX } from "react/jsx-runtime";
 
 const classes: Array<ClassType> = [
   {
@@ -44,11 +46,34 @@ const classes: Array<ClassType> = [
   },
 ];
 
+
+
+
+
 type Props = {
   setSelectedPage: (value: SelectedPage) => void;
 };
 
 const OurClasses = ({ setSelectedPage }: Props) => {
+
+  const populateSwiperArray = (array: any[]) : React.ReactElement[] => {
+    const swipperArray: JSX.Element[] = [];
+    array.map((item, index) => (
+      swipperArray.push(
+        <Class
+        key={`${item.name}-${index}`}
+        name={item.name}
+        description={item.description}
+        image={item.image}
+      />
+      )
+      ));
+      return swipperArray;
+  };
+
+  const swipperArray = populateSwiperArray(classes);
+
+  console.log("swipperArray: ", swipperArray)
   return (
     <section id="ourclasses" className="w-full bg-primary-100 py-40">
       <motion.div
@@ -75,17 +100,9 @@ const OurClasses = ({ setSelectedPage }: Props) => {
             </p>
           </div>
         </motion.div>
-        <div className="mt-10 h-[353px] w-full overflow-x-auto overflow-y-hidden">
-          <ul className="w-[2800px] whitespace-nowrap">
-            {classes.map((item: ClassType, index) => (
-              <Class
-                key={`${item.name}-${index}`}
-                name={item.name}
-                description={item.description}
-                image={item.image}
-              />
-            ))}
-          </ul>
+        
+        <div className="h-full w-full">
+          <Carousel elements={swipperArray} spaceBetween={10} maxWidth={400} containerStyles="px-7"   />
         </div>
       </motion.div>
     </section>
