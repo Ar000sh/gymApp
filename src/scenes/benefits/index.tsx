@@ -14,8 +14,6 @@ import AbstractWaves from "@/assets/AbstractWaves.png";
 import ContentSparkles from "@/assets/Sparkles.png"
 import type { JSX } from "react";
 import Carousel from "../carousel";
-import { PaginationBulletsType, type SwipperPaginationOptions } from "@/shared/swipper";
-import { tr } from "framer-motion/client";
 
 const benefits: Array<BenefitType> = [
   {
