@@ -50,7 +50,7 @@ type Props = {
 const Benefits = ({ setSelectedPage }: Props) => {
   const populateSwiperArray = (array: any[]) : React.ReactElement[] => {
     const swipperArray: JSX.Element[] = [];
-    array.map((item, index) => (
+    array.map((item) => (
       swipperArray.push(
         <Benefit
               key={item.title}
