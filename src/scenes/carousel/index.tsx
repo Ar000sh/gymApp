@@ -66,7 +66,7 @@ const raw = innerWidth / effectiveCard;
 
 // Ensure at least one slide is visible; allow fractional for preview.
 const slideWidth = Math.max(1, raw);
-console.log("slideWidth: ", slideWidth)
+//console.log("slideWidth: ", slideWidth)
 return Math.floor(slideWidth);
 }
 type Props = {
@@ -93,7 +93,7 @@ const Carousel = ({elements, spaceBetween=50, containerStyles = "", maxWidth=450
   ? { draggable: true } : false;
 
 const slidesPerView = computeSlidesPerView(measuredWidth, spaceBetween, maxWidth);
-console.log("slidesPerView: ", slidesPerView)
+//console.log("slidesPerView: ", slidesPerView)
   return (
     <div className={containerStyles} ref={containerRef}>
       {measuredWidth > 0 && (
@@ -105,7 +105,6 @@ console.log("slidesPerView: ", slidesPerView)
         pagination={pagination}
         scrollbar={scrollbar}
         loop={loop}
-        onSlideChange={() => console.log('slide change')}
       >
           {elements.map((el, i) => (
             <SwiperSlide className='!flex !items-center !justify-center h-full' key={el.key ?? i}>{el}</SwiperSlide>

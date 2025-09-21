@@ -4,26 +4,25 @@ import Logo from "@/assets/Logo.png";
 import Link from "./Link";
 import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import ActionButton from "@/shared/ActionButton";
 import { useAuth } from "@/auth/AuthContext";
 import NormalButton from "../buttons/normalButton";
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
 
 type Props = {
   isTopOfPage: boolean;
   selectedPage: SelectedPage;
+  isAboveMediumScreens: boolean;
   setSelectedPage: (value: SelectedPage) => void;
 };
 
-const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
+const LandingPageNavBar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
   const isLandingPage = isTopOfPage && selectedPage && setSelectedPage;
   const flexBetween = "flex items-center justify-between";
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
-  const navigate = useNavigate();
-  const { pathname } = useLocation()
 
-  console.log("isLandingPage: ", isLandingPage)
+
   const panelRef = useRef<HTMLDivElement>(null);
   const { ready, user, openAuth, signOut } = useAuth();
   console.log("ready: ", ready, " user: ", user);
@@ -54,6 +53,10 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
   }, []);
 
 
+  const test = (test: SelectedPage) => {
+    console.log("test: ", test);
+    setSelectedPage(test);
+  };
   return (
     <nav>
       <div
@@ -106,8 +109,13 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
                     </>
                   ) : (
                     <>
-                      <NavLink to="/login" className="text-sm">Sign In</NavLink>
-                      <NormalButton onClick={() => navigate("/signup")}>
+                      <button
+                        onClick={() => openAuth("signin")}
+                        className="text-sm"
+                      >
+                        Sign In
+                      </button>
+                      <NormalButton onClick={() => openAuth("signup")}>
                         Become a Member
                       </NormalButton>
                     </>
@@ -151,7 +159,7 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
             <Link
               page="Benefits"
               selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
+              setSelectedPage={test}
             />
             <Link
               page="Our Classes"
@@ -176,8 +184,13 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
               </>
             ) : (
               <>
-                <NavLink to="/login" onClick={() => setIsMenuToggled(false)} className="text-left text-sm">Sign In</NavLink>
-                <NormalButton onClick={() => { setIsMenuToggled(false); navigate("/signup"); }}>
+                <button
+                  onClick={() => openAuth("signin")}
+                  className="text-left text-sm"
+                >
+                  Sign In
+                </button>
+                <NormalButton onClick={() => openAuth("signup")}>
                   Become a Member
                 </NormalButton>
               </>
@@ -189,4 +202,4 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
   );
 };
 
-export default Navbar;
+export default LandingPageNavBar;

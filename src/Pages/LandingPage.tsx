@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import Navbar from "./scenes/navbar"
-import { SelectedPage } from "./shared/types";
-import Home from "./scenes/home";
-import Benefits from "./scenes/benefits";
-import OurClasses from "./scenes/ourClasses";
-import ContactUs from "./scenes/contactUs";
-import Footer from "./scenes/footer";
-import { AuthProvider } from "./auth/AuthContext";
+
 import AuthModal from "@/auth/AuthModal";
+import { SelectedPage } from "@/shared/types";
+import { AuthProvider } from "@/auth/AuthContext";
+import Benefits from "@/scenes/benefits";
+import ContactUs from "@/scenes/contactUs";
+import Footer from "@/scenes/footer";
+import Home from "@/scenes/home";
+import Navbar from "@/scenes/navbar";
+import OurClasses from "@/scenes/ourClasses";
 
-
-
-function App() {
+const LandingPage = () => {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
-    SelectedPage.Home
+    SelectedPage.Home,
   );
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
 
@@ -30,23 +29,20 @@ function App() {
   }, []);
   return (
     <>
-    <AuthProvider>
-      <div className='app bg-gray-20'>
-        <Navbar 
-        isTopOfPage={isTopOfPage}
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage} 
+      <div className="app bg-gray-20">
+        <Navbar
+          isTopOfPage={isTopOfPage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
         />
         <AuthModal />
         <Home setSelectedPage={setSelectedPage} />
         <Benefits setSelectedPage={setSelectedPage} />
         <OurClasses setSelectedPage={setSelectedPage} />
         <ContactUs setSelectedPage={setSelectedPage} />
-        <Footer />
       </div>
-      </AuthProvider>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default LandingPage;
