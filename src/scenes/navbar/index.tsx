@@ -6,7 +6,7 @@ import { SelectedPage } from "@/shared/types";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useAuth } from "@/auth/AuthContext";
 import NormalButton from "../buttons/normalButton";
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 type Props = {
   isTopOfPage: boolean;
