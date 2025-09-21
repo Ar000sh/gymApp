@@ -59,7 +59,7 @@ export default function LoginPage() {
             setFormError(err?.message || "Sign in failed.");
           }
         }}
-        onInvalid={(e) => setFormError("Please fix the highlighted fields.")}
+        onInvalid={() => setFormError("Please fix the highlighted fields.")}
       />
 
       {formError && <p className="mt-3 text-sm text-primary-500">{formError}</p>}

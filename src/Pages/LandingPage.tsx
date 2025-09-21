@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 
 import AuthModal from "@/auth/AuthModal";
 import { SelectedPage } from "@/shared/types";
-import { AuthProvider } from "@/auth/AuthContext";
 import Benefits from "@/scenes/benefits";
 import ContactUs from "@/scenes/contactUs";
-import Footer from "@/scenes/footer";
 import Home from "@/scenes/home";
 import Navbar from "@/scenes/navbar";
 import OurClasses from "@/scenes/ourClasses";

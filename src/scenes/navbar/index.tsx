@@ -21,11 +21,10 @@ const Navbar = ({ selectedPage, setSelectedPage, isTopOfPage }: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
   const navigate = useNavigate();
-  const { pathname } = useLocation()
 
   console.log("isLandingPage: ", isLandingPage)
   const panelRef = useRef<HTMLDivElement>(null);
-  const { ready, user, openAuth, signOut } = useAuth();
+  const { ready, user, signOut } = useAuth();
   console.log("ready: ", ready, " user: ", user);
   console.log("Is the landingPage: ", isLandingPage)
 
