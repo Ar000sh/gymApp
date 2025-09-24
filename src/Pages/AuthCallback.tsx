@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient";
 import { useAuth } from "@/auth/AuthContext";
 
 export default function AuthCallback() {
