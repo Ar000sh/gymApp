@@ -21,6 +21,7 @@ import AppLayout from "@/routes/AppLayout ";
 import LandingPage from "./Pages/LandingPage";
 import LoginPage from "./Pages/LoginPage ";
 import SignupPage from "./Pages/SignupPage ";
+import AuthCallback from "./Pages/AuthCallback";
 
 const router = createBrowserRouter([
   // Landing (one-page)
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
+       { path: "/auth/callback", element: <AuthCallback /> },
       // add more here: /courses, /profile, etc.
     ],
   },

@@ -8,7 +8,8 @@ type AuthContextType = {
   ready: boolean;                   // auth initialized
   user: AuthUser;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, options?: { emailRedirectTo?: string } ) => Promise<void>;
+  resendVerficationEmail: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   // modal controls
   open: boolean;
@@ -49,15 +50,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setOpen(false);
   }
 
-  async function signUp(email: string, password: string) {
+  /*async function signUp(email: string, password: string) {
     // You can enable email confirmations in Supabase auth settings.
     const { error } = await supabase.auth.signUp({ email, password });
     console.log("Something something")
     if (error) throw error;
     // Optional: auto-close; you may want to inform user to check email.
     setOpen(false);
-  }
+  }*/
 
+  async function signUp(email: string, password: string, options?: { emailRedirectTo?: string }) {
+  const { error } = await supabase.auth.signUp({ email, password, options });
+  if (error) throw error;
+  setOpen(false); // if you still use the modal elsewhere
+}
+async function resendVerficationEmail(email:string) {
+  const { error } = await supabase.auth.resend({ type: "signup", email });
+  if (error) throw error;
+}
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
@@ -69,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       user,
       signIn,
       signUp,
+      resendVerficationEmail,
       signOut,
       open,
       mode,

@@ -4,6 +4,7 @@ import type { InputField } from "@/shared/formTypes";
 function getMessage(type?: string, messages?: Record<string, string>) {
   if (!type) return "";
   if (messages?.[type]) return messages[type];
+  console.log("type: ", type)
   switch (type) {
     case "required": return "This field is required.";
     case "maxLength": return "Max length exceeded.";
@@ -11,6 +12,11 @@ function getMessage(type?: string, messages?: Record<string, string>) {
     case "pattern": return "Invalid format.";
     case "min": return "Value is too low.";
     case "max": return "Value is too high.";
+    case "noSpaces": return "Value cant have spaces.";
+    case "hasLower": return "Value must contain at least lowercase letter.";
+    case "hasUpper": return "Value must contain at least one uppercase letter.";
+    case "hasNumber": return "Value must contain at least one number.";
+    case "hasSymbol": return "Value must contain at least one symbol.";
     default: return "Invalid value.";
   }
 }
