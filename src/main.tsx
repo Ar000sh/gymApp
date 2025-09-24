@@ -22,6 +22,7 @@ import LandingPage from "./Pages/LandingPage";
 import LoginPage from "./Pages/LoginPage ";
 import SignupPage from "./Pages/SignupPage ";
 import AuthCallback from "./Pages/AuthCallback";
+import DemoPage from "./payments/page";
 
 const router = createBrowserRouter([
   // Landing (one-page)
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignupPage /> },
        { path: "/auth/callback", element: <AuthCallback /> },
+      { path: "/classes", element: <DemoPage /> },
       // add more here: /courses, /profile, etc.
     ],
   },
